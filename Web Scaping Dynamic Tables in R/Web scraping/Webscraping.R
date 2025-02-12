@@ -17,6 +17,18 @@ library(wdman)
 # Start Selenium server on port 4444 (integer value)
 sel <- selenium(port = 4444)
 
+#============================================
+rs_driver_object <- rsDriver(browser ="chrome",
+                             chromever = "114.0.5735.90",
+                             verbose =F,
+                             port= free_port())
+
+
+
+
+
+
+
 #-------------------------------------------------
 
 binman::list_versions("chromedriver")
