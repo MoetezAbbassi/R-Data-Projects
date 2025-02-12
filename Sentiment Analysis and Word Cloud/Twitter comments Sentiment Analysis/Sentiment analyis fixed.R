@@ -67,7 +67,7 @@ wordcloud(words = names(w),
           colors = brewer.pal(8, 'Dark2'),
           scale= c(5, 0.3),
           rot.per = 0.7)
- 
+
 #sentiment analysis:
 library(syuzhet)
 library(lubridate)
@@ -91,4 +91,3 @@ barplot(colSums(S),
         col=rainbow(10),
         ylab='Count',
         main='Sentiment scores for apple tweets')
- 

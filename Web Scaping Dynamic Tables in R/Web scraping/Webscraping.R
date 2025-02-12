@@ -10,3 +10,7 @@ library(RSelenium) #activate Selenimu server
 library(rvest) # web scrape tables
 library(netstat) # find unused port
 library(data.table) #rbindlist function
+
+#-------------------------------------------------
+
+rs_driver_object <- rsDriver(brower="opera")
