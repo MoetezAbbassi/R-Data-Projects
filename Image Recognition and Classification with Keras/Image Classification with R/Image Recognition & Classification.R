@@ -1,9 +1,17 @@
 install.packages("BiocManager")
 BiocManager::install("EBImage")
 install.packages("keras")
+install.packages("tensorflow")
 
 library(EBImage)
 library(keras)
+library(reticulate)
+library(tensorflow)
+py_config()
+install_tensorflow()
+install_keras()
+
+
 
 
 #reading images:
@@ -47,3 +55,32 @@ testy <- c(0,1)
 
 trainLabels <- to_categorical(trainy)
 testLabels <- to_categorical(testy)
+
+trainLabels
+
+
+#Model Creation:
+
+model<- keras_model_sequential()
+model %>%
+  layer_dense(units = 256, activation='relu', input_shape= c(2352)) %>%
+  layer_dense(units=128, activation='relu') %>%
+  layer_dense(units = 2, activation='softmax')
+
+summary(model)
+
+#Compiling the model:
+model %>%
+  compile(loss='binary_crossentropy',
+          optimizer=optimizer_rmsprop(),
+          metrics= c('accuracy'))
+
+#Fit Model:
+history <- model %>%
+  fit(trainx,
+      trainLabels,
+      epochs=30,
+      batch_size=32,
+      validation_split=0.2)
+
+plot(history)
