@@ -84,3 +84,18 @@ history <- model %>%
       validation_split=0.2)
 
 plot(history)
+
+
+#Evaluating and Prediction of the model: (train data)
+
+model %>% evaluate(trainx, trainLabels)
+pred <- model %>% predict_classes(trainx)
+table(Predicted=pred, Actual=trainy)
+prob <- model %>% predict_proba(trainx)
+cbind(prob, Predicted=pred, Actual=trainy)
+
+
+#Evaluation & Prediction (test data):
+model %>% evaluate(testx, testLabels)
+pred<- model %>% predict_classes(testx)
+table(Predicted = pred, Actual= testy)
