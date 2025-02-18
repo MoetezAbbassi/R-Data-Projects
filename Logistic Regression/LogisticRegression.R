@@ -32,3 +32,21 @@ p1 <- predict(mymodel, train, type="response")
 head(p1)
 head(train)
 
+#Mis-classification error (confusion matrix) - train data:
+pred1 <- ifelse(p1>0.5, 1, 0)
+tab1 <- table(Predicted=pred1, Actual= train$admit)
+tab1
+
+accuracy=1- sum(diag(tab1))/sum(tab1)
+accuracy #27.07%
+
+p2 <- predict(mymodel, test, type='response')
+pred2 <- ifelse(p2 > 0.5, 1, 0)
+tab2 <- table(Predicted=pred2, Actual=test$admit)
+
+accuracy2=1- sum(diag(tab2))/sum(tab2)
+accuracy2 #29.34%
+
+#Goodness-of-fit test:
+with(mymodel, pchisq(null.deviance - deviance, df.null-df.residual, lower.tail=F))
+print("P-value = 1.450537e-06 ==> This Model is statistically significant")
