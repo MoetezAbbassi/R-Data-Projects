@@ -20,3 +20,9 @@ print(rf)
 
 attributes(rf)
 rf$confusion
+
+
+#Prediction & Confusion Matrix: (training data):
+library(caret)
+p1 <- predict(rf, train)
+confusionMatrix(p1, train$NSP)
