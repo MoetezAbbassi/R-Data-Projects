@@ -14,7 +14,10 @@ test<- data[ind==2,]
 
 library(randomForest)
 set.seed(222)
-rf <- randomForest(NSP~., data=train)
+rf <- randomForest(NSP~., data=train, ntree=300,
+                   mtry = 8,
+                   importance= TRUE,
+                   proximity=TRUE)
 print(rf)
 
 
@@ -34,3 +37,11 @@ confusionMatrix(p2, test$NSP)
 #evaluating the error rate of random forest:
 plot(rf)
 
+
+#Tune mtry:
+tuneRF(train[,-22], train[,22],
+       stepFactor = 0.5,
+       plolt = TRUE,
+       ntreeTry = 300,
+       trace = TRUE, 
+       improve= 0.05)
