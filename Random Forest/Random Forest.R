@@ -26,3 +26,11 @@ rf$confusion
 library(caret)
 p1 <- predict(rf, train)
 confusionMatrix(p1, train$NSP)
+
+#~~ test data:
+p2 <- predict(rf, test)
+confusionMatrix(p2, test$NSP)
+
+#evaluating the error rate of random forest:
+plot(rf)
+
