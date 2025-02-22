@@ -45,3 +45,19 @@ tuneRF(train[,-22], train[,22],
        ntreeTry = 300,
        trace = TRUE, 
        improve= 0.05)
+
+
+#Number of nodes for trees:
+
+hist(treesize(rf),
+     main="Number of nodes for the trees",
+     col="blue",
+     )
+
+#Variable Importance:
+varImpPlot(rf,
+           sort=T,
+           n.var=10,
+           main="Top 10 - Variable Importance")
+importance(rf)
+varUsed(rf)
