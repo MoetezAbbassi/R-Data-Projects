@@ -37,7 +37,7 @@ test<- df[ind==2,]
 
 
 #Naive Bayes Model:
-model <- naive_bayes(admit ~ ., data=train)
+model <- naive_bayes(admit ~ ., data=train, usekernel = T)
 model
 
 
@@ -49,4 +49,16 @@ plot(model)
 
 
 #Predict
-p
+p <- predict(model, train, type='prob')
+head(cbind(p,train))
+
+
+#Confusion matrix - test data:
+p1 <- predict(model, train)
+tab1 <- table(p1, train$admit)
+1- sum(diag(tab1)) / sum(tab1)
+
+
+p2 <- predict(model, test)
+tab2 <- table(p2, test$admit)
+1- sum(diag(tab2)) / sum(tab2)
