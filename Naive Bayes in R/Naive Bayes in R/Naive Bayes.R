@@ -27,3 +27,26 @@ df %>%
 df %>% ggplot(aes(x=gre, fill=admit)) +
   geom_density(alpha=0.8, color='black')+
                  ggtitle("Density plot")
+
+
+#data splitting
+set.seed(1234)
+ind <- sample(2,nrow(df),replace=T,prob=c(0.8, 0.2))
+train <- df[ind==1,]
+test<- df[ind==2,]
+
+
+#Naive Bayes Model:
+model <- naive_bayes(admit ~ ., data=train)
+model
+
+
+train %>%
+  filter(admit=="1") %>%
+           summarise(mean(gre), sd(gre))
+
+plot(model)
+
+
+#Predict
+p
