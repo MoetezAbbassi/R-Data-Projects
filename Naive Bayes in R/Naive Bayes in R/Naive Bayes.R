@@ -18,8 +18,12 @@ df$admit <- as.factor(df$admit)
 
 #visualization:
 pairs.panels(df[-1])
-
+##boxplot
 df %>%
   ggplot(aes(x=admit, y=gre, fill=admit))+
   geom_boxplot()+
   ggtitle("Box Plot")
+##density plot
+df %>% ggplot(aes(x=gre, fill=admit)) +
+  geom_density(alpha=0.8, color='black')+
+                 ggtitle("Density plot")
